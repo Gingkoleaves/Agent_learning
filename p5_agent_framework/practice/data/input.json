@@ -1,0 +1,7 @@
+{
+  "mode": "langgraph",
+  "session_id": "session-001",
+  "question": "生成三天学习计划，确认后保存",
+  "decision": null,
+  "resume": false
+}

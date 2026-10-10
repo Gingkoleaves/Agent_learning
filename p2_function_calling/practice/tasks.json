@@ -1,0 +1,37 @@
+[
+  {
+    "id": "P2-01",
+    "file": "solution.py:validate_arguments",
+    "description": "校验字段、日期与来源 ID"
+  },
+  {
+    "id": "P2-02",
+    "file": "solution.py:create_study_task",
+    "description": "实现持久化写入与 request_id 幂等，返回任务 ID"
+  },
+  {
+    "id": "P2-03",
+    "file": "solution.py:get_study_task",
+    "description": "读取真实存储状态"
+  },
+  {
+    "id": "P2-04",
+    "file": "solution.py:dispatch_calls",
+    "description": "处理多个工具请求，保持每个调用 ID 和结果关联"
+  },
+  {
+    "id": "P2-05",
+    "file": "solution.py:run",
+    "description": "实现原生工具调用闭环、错误恢复与调用预算"
+  },
+  {
+    "id": "P2-MCP-SERVER",
+    "file": "mcp_server.py:main",
+    "description": "实现 MCP stdio server 和四类入口中的 tool/resource/prompt"
+  },
+  {
+    "id": "P2-MCP-CLIENT",
+    "file": "mcp_client.py:main",
+    "description": "实现 MCP 发现、读取、调用及接入助手"
+  }
+]

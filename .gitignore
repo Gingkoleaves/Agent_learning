@@ -1,1 +1,38 @@
-tmp
+# Local credentials
+.env
+.env.*
+!.env.example
+api-key.txt
+**/api-key*.txt
+*.pem
+*.key
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+.venv/
+.conda-env/
+.conda-envs/
+.conda-pkgs/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Generated experiment output; keep curated data and reports tracked
+tmp/
+**/practice/artifacts/*
+!**/practice/artifacts/.gitkeep
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
+# OS / exported browser assets
+.DS_Store
+Thumbs.db
+/Agent 开发 · AI Infra Academy_files/

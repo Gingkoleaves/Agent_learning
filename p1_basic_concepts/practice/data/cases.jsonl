@@ -1,0 +1,1 @@
+{"id": "p1-sample-001", "fixture_only": true, "input": {"mode": "agent", "question": "比较 ReAct 与固定 workflow，并给出来源"}, "expected_facts": [], "expected_evidence_ids": [], "initial_state": {}, "expected_final_state": null, "allowed_actions": [], "forbidden_actions": [], "user_script": [], "annotation_status": "TODO: 人工补全后才能用于正式评测"}

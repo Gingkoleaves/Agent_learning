@@ -1,0 +1,27 @@
+[
+  {
+    "id": "P1-01",
+    "file": "solution.py:search_notes",
+    "description": "实现关键词搜索，返回可定位的证据列表"
+  },
+  {
+    "id": "P1-02",
+    "file": "solution.py:read_note",
+    "description": "精确读取段落，缺失时给出明确错误"
+  },
+  {
+    "id": "P1-03",
+    "file": "solution.py:run_workflow",
+    "description": "固定搜索→读取→回答流程，作为对照"
+  },
+  {
+    "id": "P1-04",
+    "file": "solution.py:run_agent",
+    "description": "实现动作→执行→观察循环、终止条件及预算限制"
+  },
+  {
+    "id": "P1-05",
+    "file": "solution.py:run",
+    "description": "根据 payload.mode 分派 agent/workflow，返回答案、引用与统计"
+  }
+]

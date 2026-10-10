@@ -1,0 +1,11 @@
+{
+  "user_id": "learner-a",
+  "question": "按我的进度安排今天学习",
+  "facts": {
+    "completed": [
+      "ReAct"
+    ],
+    "minutes_per_day": 45
+  },
+  "strategy": "summary_retrieval"
+}

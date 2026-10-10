@@ -1,0 +1,15 @@
+[
+  {
+    "type": "tool_call",
+    "call_id": "call-001",
+    "name": "search_notes",
+    "arguments": {
+      "query": "ReAct"
+    }
+  },
+  {
+    "type": "final",
+    "answer": "这是模拟回复；不是实际资料检索的答案。",
+    "citations": []
+  }
+]

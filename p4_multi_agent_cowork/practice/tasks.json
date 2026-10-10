@@ -1,0 +1,27 @@
+[
+  {
+    "id": "P4-01",
+    "file": "solution.py:build_team",
+    "description": "用 AutoGen 或 CrewAI 创建独立角色与记忆"
+  },
+  {
+    "id": "P4-02",
+    "file": "solution.py:route_message",
+    "description": "校验消息契约并定向传递，处理角色超时"
+  },
+  {
+    "id": "P4-03",
+    "file": "solution.py:reflect",
+    "description": "生成带来源的反思，区分事实和推断"
+  },
+  {
+    "id": "P4-04",
+    "file": "solution.py:validate_plan",
+    "description": "程序验证时间交集、时长、分工与证据 ID"
+  },
+  {
+    "id": "P4-05",
+    "file": "solution.py:run",
+    "description": "运行有限轮协作，对比单角色、无反思、有反思三种模式"
+  }
+]

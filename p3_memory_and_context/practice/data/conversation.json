@@ -1,0 +1,9 @@
+{
+  "fixture_only": true,
+  "sessions": [
+    {"user_id": "learner-a", "session_id": "a-1", "messages": ["我读完了 ReAct，每天有 45 分钟。"]},
+    {"user_id": "learner-a", "session_id": "a-2", "messages": ["现在每天只有 20 分钟，请更新安排。", "我目前读到了哪里？"]},
+    {"user_id": "learner-b", "session_id": "b-1", "messages": ["我是新用户，请问你知道我的进度吗？"]}
+  ],
+  "annotation_status": "TODO: 扩充成长对话并人工标注期望记忆"
+}

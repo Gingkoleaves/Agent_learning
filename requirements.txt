@@ -1,0 +1,3 @@
+# Foundation uses Python standard library only (Python >= 3.9).
+# Add provider/framework dependencies when implementing the relevant chapter.
+# Pin the exact versions that you have tested; do not install all frameworks at once.

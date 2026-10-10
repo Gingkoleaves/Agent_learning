@@ -46,7 +46,11 @@ agent：强调与环境和人类指令互动并最终结束![示意图](image-8.
 
 本文意思是，应当针对不同的任务类型选择不同的aug-llm调用流程设计，根据问题设计llm调用流程；workflow对处理结构明确的任务应用，固定各部分流程和功能，可变的只有输入数据；对于执行路径难以预先确定的任务使用agent，agent让用户提供目标，模型决定下一步做什么并最终给出结果
 
-## Paper：ReACT
+### Paper：ReACT
 
 要求llm推理时输出thought-action和执行后的obs，且每次在上次的t/a/o基础上重新运行直到输出结果
 ![ReAct输出格式](image-9.png)
+
+### Timeline
+
+23prompt-engineer、24rag&SFT、25agent、26rl&wm

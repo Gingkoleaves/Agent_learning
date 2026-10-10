@@ -1,0 +1,1 @@
+{"id": "p6-sample-001", "fixture_only": true, "input": {"repeats": 3, "suite": "development", "agent_chapter": 5}, "expected_facts": [], "expected_evidence_ids": [], "initial_state": {}, "expected_final_state": null, "allowed_actions": [], "forbidden_actions": [], "user_script": [], "annotation_status": "TODO: 人工补全后才能用于正式评测"}

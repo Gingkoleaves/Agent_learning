@@ -1,0 +1,1 @@
+{"id":"holdout-template","fixture_only":true,"annotation_status":"TODO: 独立编写 6 个未参与调试的题，不复制 development 集","input":{},"initial_state":{},"expected_final_state":null,"expected_facts":[],"expected_evidence_ids":[],"allowed_actions":[],"forbidden_actions":[],"user_script":[]}

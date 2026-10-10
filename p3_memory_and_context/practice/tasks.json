@@ -1,0 +1,27 @@
+[
+  {
+    "id": "P3-01",
+    "file": "solution.py:build_index",
+    "description": "构造带来源和定位信息的 chunk，embedding 后持久化索引"
+  },
+  {
+    "id": "P3-02",
+    "file": "solution.py:retrieve",
+    "description": "返回 top-k 证据并保留定位信息"
+  },
+  {
+    "id": "P3-03",
+    "file": "solution.py:update_profile",
+    "description": "按用户更新档案，保留来源与时间，新值覆盖有效旧值"
+  },
+  {
+    "id": "P3-04",
+    "file": "solution.py:build_context",
+    "description": "实现截断、摘要、摘要加记忆检索，预留工具与回答空间"
+  },
+  {
+    "id": "P3-05",
+    "file": "solution.py:run",
+    "description": "串联索引、记忆、上下文和回答，提供关键词检索对照"
+  }
+]

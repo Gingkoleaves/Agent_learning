@@ -1,0 +1,5 @@
+[
+  {"id": "host", "role": "主持人", "known_topics": ["ReAct"], "available": {"date": "2026-10-16", "start": "19:00", "end": "20:00"}, "observations": [], "reflections": []},
+  {"id": "researcher", "role": "资料员", "known_topics": ["Toolformer"], "available": {"date": "2026-10-16", "start": "18:30", "end": "20:00"}, "observations": [], "reflections": []},
+  {"id": "critic", "role": "质疑者", "known_topics": ["MemGPT"], "available": {"date": "2026-10-16", "start": "19:00", "end": "20:30"}, "observations": [], "reflections": []}
+]

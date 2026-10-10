@@ -1,0 +1,27 @@
+[
+  {
+    "id": "P6-01",
+    "file": "solution.py:reset_environment",
+    "description": "每次评测恢复独立初始数据库及会话"
+  },
+  {
+    "id": "P6-02",
+    "file": "solution.py:evaluate_case",
+    "description": "按事实、引用、动作规则和数据库终态判分"
+  },
+  {
+    "id": "P6-03",
+    "file": "solution.py:summarize",
+    "description": "计算单次成功率、三次全成功比例、调用统计和 p50/p95 耗时"
+  },
+  {
+    "id": "P6-04",
+    "file": "solution.py:configure_observability",
+    "description": "接入 OpenTelemetry 父子 span 和一条 LangSmith trace"
+  },
+  {
+    "id": "P6-05",
+    "file": "solution.py:run",
+    "description": "运行 30 题各 3 次，保留原始结果，单独执行未参与调试题"
+  }
+]

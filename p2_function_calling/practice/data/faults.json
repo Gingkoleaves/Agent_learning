@@ -1,0 +1,5 @@
+[
+  {"id": "invalid_arguments", "description": "缺少 title 或使用非法日期，必须在写入前拒绝"},
+  {"id": "temporary_search_failure", "description": "第一次查询抛出超时，有限重试后恢复或明确失败"},
+  {"id": "lost_write_response", "description": "成功写入后模拟丢失响应，用同一 request_id 重试，不重复创建"}
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "P5-01",
+    "file": "solution.py:build_graph",
+    "description": "用 LangGraph 创建有类型状态、校验回路、确认及保存节点"
+  },
+  {
+    "id": "P5-02",
+    "file": "solution.py:resume_session",
+    "description": "读取持久化检查点并恢复，正确区分用户确认状态"
+  },
+  {
+    "id": "P5-03",
+    "file": "solution.py:run_sdk_baseline",
+    "description": "用 OpenAI Agents SDK 实现小型同题对照"
+  },
+  {
+    "id": "P5-04",
+    "file": "solution.py:run",
+    "description": "分派新建/恢复与框架对照，外部写入复用第 2 章幂等工具"
+  },
+  {
+    "id": "P5-STATE",
+    "file": "state.py:StudyState",
+    "description": "定义初始化、reducer 与合法状态迁移"
+  }
+]

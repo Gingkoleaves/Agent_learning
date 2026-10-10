@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "practice（选择章节）",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "D:/Miniconda3/envs/agent-learn/python.exe",
+      "debugAdapterPython": "D:/Miniconda3/envs/agent-learn/python.exe",
+      "debugLauncherPython": "D:/Miniconda3/envs/agent-learn/python.exe",
+      "program": "${workspaceFolder}/practice.py",
+      "args": ["${input:chapter}", "run"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "stopOnEntry": false,
+      "justMyCode": true,
+      "env": {
+        "PYTHONUTF8": "1",
+        "PYTHONUNBUFFERED": "1",
+        "MODEL_PROVIDER": "${input:modelProvider}"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "chapter",
+      "type": "pickString",
+      "description": "选择要调试的章节",
+      "options": ["1", "2", "3", "4", "5", "6"],
+      "default": "1"
+    },
+    {
+      "id": "modelProvider",
+      "type": "pickString",
+      "description": "选择模型",
+      "options": ["scripted", "deepseek"],
+      "default": "scripted"
+    }
+  ]
+}
