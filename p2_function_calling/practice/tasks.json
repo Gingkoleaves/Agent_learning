@@ -7,7 +7,7 @@
   {
     "id": "P2-02",
     "file": "solution.py:create_study_task",
-    "description": "实现持久化写入与 request_id 幂等，返回任务 ID"
+    "description": "实现持久化写入与 host operation_id 幂等，返回任务 ID"
   },
   {
     "id": "P2-03",

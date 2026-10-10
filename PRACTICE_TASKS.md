@@ -58,8 +58,8 @@
 ### 要做什么
 
 1. 将第 1 章工具改成模型接口支持的原生工具调用；处理一轮多个调用，逐个关联调用 ID 与结果，再继续循环。
-2. 新增 `create_study_task(title, due_date, source_ids, request_id)` 和 `get_study_task(task_id)`，存到本地 SQLite 或 JSON。
-3. 做参数校验：日期格式、必填字段、文档 ID 是否存在；用稳定 `request_id` 防止同一写入请求重试产生重复任务。
+2. 新增模型可见的 `create_study_task(title, due_date, source_ids)`、`get_study_task(task_id)` 和 `update_study_task(task_id, ...)`，存到本地 SQLite 或 JSON。
+3. 做参数校验：日期格式、必填字段、文档 ID 是否存在；host 生成并持久化稳定 `operation_id` 和原始参数，通信重试复用它们，模型不填写写入编号。
 4. 写一个本地 MCP server，提供两个查询 tool、一份课程目录 resource、一份比较论文用 prompt；写 client 展示发现与读取过程，并让助手通过 MCP 调用查询工具。
 5. 注入三种错误：非法参数、查询工具暂时失败、写入成功但响应丢失。记录恢复策略与最终状态。
 6. 用 12 道题比较“工具可用但模型自由选择”和“每题强制检索”。其中加入至少 4 道无需工具的改写或归纳题，人工标注合理调用需求。

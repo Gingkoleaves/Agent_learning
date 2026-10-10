@@ -1,1 +1,1 @@
-# Add and pin only dependencies actually used by this chapter.
+mcp==1.30.0

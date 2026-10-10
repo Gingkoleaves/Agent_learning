@@ -39,7 +39,7 @@ class DeepSeekAdapter(ModelAdapter):
             "messages": self._prepare_messages(messages),
         }
         if tools:
-            body["tools"] = [_tool_schema(name) for name in tools]
+            body["tools"] = [tool if isinstance(tool, dict) else _tool_schema(tool) for tool in tools]
             body["tool_choice"] = "auto"
 
         request = Request(
@@ -69,19 +69,18 @@ class DeepSeekAdapter(ModelAdapter):
         message = (payload.get("choices") or [{}])[0].get("message") or {}
         tool_calls = message.get("tool_calls") or []
         if tool_calls:
-            call = tool_calls[0]
-            function = call.get("function") or {}
-            try:
-                arguments = json.loads(function.get("arguments", "{}"))
-            except json.JSONDecodeError:
-                arguments = {}
-            return {
-                "type": "tool_call",
-                "call_id": call.get("id", "call-{}".format(self.calls)),
-                "name": function.get("name", ""),
-                "arguments": arguments,
-                "usage": usage,
-            }
+            calls = []
+            for index, call in enumerate(tool_calls):
+                function = call.get("function") or {}
+                try:
+                    arguments = json.loads(function.get("arguments", "{}"))
+                except json.JSONDecodeError:
+                    arguments = {}
+                calls.append(dict(type="tool_call", call_id=call.get("id", "call-{}-{}".format(self.calls, index)),
+                                  name=function.get("name", ""), arguments=arguments))
+            if len(calls) == 1:
+                return dict(calls[0], usage=usage)
+            return dict(type="tool_calls", calls=calls, usage=usage)
 
         return {
             "type": "final",
@@ -97,16 +96,17 @@ class DeepSeekAdapter(ModelAdapter):
             content = item.get("content")
             if item.get("role") == "assistant" and isinstance(content, dict):
                 item["content"] = ""
+                calls = content.get("calls", []) if content.get("type") == "tool_calls" else [content]
                 item["tool_calls"] = [{
-                    "id": content.get("call_id", "call-unknown"),
+                    "id": call.get("call_id", "call-unknown"),
                     "type": "function",
                     "function": {
-                        "name": content.get("name", ""),
+                        "name": call.get("name", ""),
                         "arguments": json.dumps(
-                            content.get("arguments") or {}, ensure_ascii=False
+                            call.get("arguments") or {}, ensure_ascii=False
                         ),
                     },
-                }]
+                } for call in calls]
             if item.get("role") == "tool" and "tool_call_id" not in item:
                 item["tool_call_id"] = item.get("call_id", "call-unknown")
             item.pop("call_id", None)
@@ -152,6 +152,59 @@ def _tool_schema(name):
                         "paragraph_id": {"type": "string"},
                     },
                     "required": ["doc_id", "paragraph_id"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "create_study_task": {
+            "type": "function",
+            "function": {
+                "name": "create_study_task",
+                "description": "Create a new study task. source_ids must be document IDs such as p2-note.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "title": {"type": "string"},
+                        "due_date": {
+                            "type": "string",
+                            "description": "Due date in YYYY-MM-DD format.",
+                        },
+                        "source_ids": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "Document IDs supporting the task.",
+                        },
+                    },
+                    "required": ["title", "due_date", "source_ids"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "update_study_task": {
+            "type": "function",
+            "function": {
+                "name": "update_study_task", "description": "Update an existing task by task_id.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "task_id": {"type": "string"}, "title": {"type": "string"},
+                        "due_date": {"type": "string"},
+                        "source_ids": {"type": "array", "items": {"type": "string"}},
+                        "status": {"type": "string", "enum": ["pending", "completed"]},
+                    },
+                    "required": ["task_id"], "additionalProperties": False,
+                },
+            },
+        },
+        "get_study_task": {
+            "type": "function",
+            "function": {
+                "name": "get_study_task",
+                "description": "Read a persisted study task by task ID.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {"task_id": {"type": "string"}},
+                    "required": ["task_id"],
                     "additionalProperties": False,
                 },
             },
