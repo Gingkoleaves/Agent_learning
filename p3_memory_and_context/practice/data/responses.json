@@ -1,11 +1,7 @@
 [
   {
-    "type": "tool_call",
-    "call_id": "call-001",
-    "name": "search_notes",
-    "arguments": {
-      "query": "ReAct"
-    }
+    "type": "final",
+    "answer": "这是模拟生成器的占位回复，仅用于验证 P3 数据流；不代表真实回答或检索质量。"
   },
   {
     "type": "final",

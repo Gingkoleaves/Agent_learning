@@ -24,11 +24,12 @@ class DeepSeekAdapter(ModelAdapter):
     """DeepSeek chat-completions adapter with normalized tool-call output."""
 
     def __init__(self, api_key, model_name="deepseek-chat", max_calls=8,
-                 timeout_seconds=30, base_url="https://api.deepseek.com/chat/completions"):
+                 timeout_seconds=30, base_url="https://api.deepseek.com/chat/completions", max_output_tokens=None):
         super().__init__(max_calls=max_calls, timeout_seconds=timeout_seconds)
         self.api_key = api_key
         self.model_name = model_name
         self.base_url = base_url
+        self.max_output_tokens = max_output_tokens
 
     def respond(self, messages, tools=None):
         if self.calls >= self.max_calls:
@@ -38,6 +39,8 @@ class DeepSeekAdapter(ModelAdapter):
             "model": self.model_name,
             "messages": self._prepare_messages(messages),
         }
+        if self.max_output_tokens is not None:
+            body["max_tokens"] = self.max_output_tokens
         if tools:
             body["tools"] = [tool if isinstance(tool, dict) else _tool_schema(tool) for tool in tools]
             body["tool_choice"] = "auto"

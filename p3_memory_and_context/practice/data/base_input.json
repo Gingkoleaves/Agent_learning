@@ -1,0 +1,9 @@
+{
+  "user_id": "p3-demo-learner",
+  "question": "MemGPT 的 working context 和 FIFO 有什么区别？结合我的时间预算安排今天的学习。",
+  "facts": {
+    "completed": {"value": ["ReAct"], "source": "base_input.json:user_explicit_statement"},
+    "minutes_per_day": {"value": 45, "source": "base_input.json:user_explicit_statement"}
+  },
+  "strategy": "summary_retrieval"
+}

@@ -23,5 +23,30 @@
     "id": "P3-05",
     "file": "solution.py:run",
     "description": "串联索引、记忆、上下文和回答，提供关键词检索对照"
+  },
+  {
+    "id": "P3-06",
+    "file": "solution.py:init_memory",
+    "description": "初始化或恢复 working context、FIFO、recall 与 archival，隔离用户"
+  },
+  {
+    "id": "P3-07",
+    "file": "solution.py:manage_context",
+    "description": "处理事件、持久化历史、预算警告、FIFO 移出与摘要"
+  },
+  {
+    "id": "P3-08",
+    "file": "solution.py:execute_memory_tool",
+    "description": "校验并执行记忆工具，区分状态修改与返回消息"
+  },
+  {
+    "id": "P3-09",
+    "file": "solution.py:run_memory_agent",
+    "description": "实现 heartbeat/yield、事件唤醒和有预算的函数调用链"
+  },
+  {
+    "id": "P3-10",
+    "file": "solution.py:evaluate_memory",
+    "description": "运行固定记忆场景、存储终态检查和四种上下文策略对照"
   }
 ]

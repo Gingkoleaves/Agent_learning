@@ -2,6 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "P3 base：DeepSeek + 本地 embedding（单步）",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "D:/Miniconda3/envs/agent-learn/python.exe",
+      "module": "p3_memory_and_context.practice.base_demo",
+      "args": ["--provider", "deepseek", "--embedding", "local", "--input", "${workspaceFolder}/p3_memory_and_context/practice/data/${input:p3Input}"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "stopOnEntry": false,
+      "justMyCode": true,
+      "env": {"PYTHONUTF8": "1", "PYTHONUNBUFFERED": "1", "P3_DEBUG": "1"}
+    },
+    {
       "name": "practice（选择章节）",
       "type": "debugpy",
       "request": "launch",
@@ -24,6 +37,13 @@
     }
   ],
   "inputs": [
+    {
+      "id": "p3Input",
+      "type": "pickString",
+      "description": "P3 场景：初始档案 → 更新为20分钟 → 重启读取",
+      "options": ["base_input.json", "base_update.json", "base_recall.json"],
+      "default": "base_input.json"
+    },
     {
       "id": "chapter",
       "type": "pickString",

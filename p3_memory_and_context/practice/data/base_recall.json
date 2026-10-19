@@ -1,0 +1,6 @@
+{
+  "user_id": "p3-demo-learner",
+  "question": "我读过什么，每天有多少学习时间？再解释一下 RAG 检索器。",
+  "facts": {},
+  "strategy": "summary_retrieval"
+}

@@ -1,0 +1,6 @@
+{
+  "user_id": "p3-demo-learner",
+  "question": "现在每天只有20分钟了。按当前预算给我安排学习计划，并解释 RAG 中检索器的作用。",
+  "facts": {"minutes_per_day": {"value": 20, "source": "base_update.json:user_explicit_statement"}},
+  "strategy": "summary_retrieval"
+}
