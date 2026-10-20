@@ -14,12 +14,20 @@ CHAPTERS = {
 }
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description="Agent learning practice scaffold")
-    parser.add_argument("chapter", type=int, choices=CHAPTERS)
+    parser.add_argument("chapter", choices=[str(n) for n in CHAPTERS] + ["3-rag", "3-memgpt"],
+                        help="Chapter number; 3-rag/3-memgpt also select the P3 mode")
     parser.add_argument("command", choices=["status", "demo", "run"])
     parser.add_argument("--input", type=Path, help="Override sample input JSON")
-    args = parser.parse_args()
+    parser.add_argument("--mode", choices=["rag", "memgpt"], help="P3 execution mode (default: rag)")
+    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="P3 model provider")
+    parser.add_argument("--evaluate", action="store_true", help="P3 memgpt: run mechanism evaluation")
+    args = parser.parse_args(argv)
+    chapter_selection = args.chapter.split("-", 1)
+    args.chapter = int(chapter_selection[0])
+    if len(chapter_selection) == 2 and args.mode is None:
+        args.mode = chapter_selection[1]
     chapter = ROOT / CHAPTERS[args.chapter] / "practice"
     tasks = load_json(chapter / "tasks.json")
     if args.command == "status":
@@ -27,6 +35,15 @@ def main():
         for task in tasks:
             print("{} [{}] {}".format(task["id"], task["file"], task["description"]))
         return 0
+    if args.chapter == 3 and args.command == "run":
+        from p3_memory_and_context.practice.solution import launch
+        if args.evaluate:
+            from p3_memory_and_context.practice.solution import evaluate_memory
+            result = evaluate_memory({})
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return int(result["failures"] > 0)
+        provider = args.provider or os.environ.get("MODEL_PROVIDER", "scripted")
+        return launch(args.mode or "rag", provider, args.input)
     trace = Trace(chapter / "artifacts" / (args.command + ".jsonl"))
     config = load_json(chapter / "config.json")
     payload = load_json(args.input or chapter / "data" / "input.json")

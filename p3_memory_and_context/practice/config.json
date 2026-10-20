@@ -1,7 +1,18 @@
 {
   "max_model_calls": 8,
   "max_rounds": 8,
-  "timeout_seconds": 30,
-  "context_token_budget": 2000,
-  "reserve_output_tokens": 500
+  "timeout_seconds": 3600,
+  "context_token_budget": 6000,
+  "reserve_output_tokens": 800,
+  "memory": {
+    "context_token_budget": 14000,
+    "reserve_output_tokens": 800,
+    "reserve_tool_tokens": 1800,
+    "working_context_budget": 2400,
+    "max_model_calls": 8,
+    "max_rounds": 8,
+    "max_tool_calls": 16,
+    "timeout_seconds": 3600
+  },
+  "reserve_tool_tokens": 400
 }

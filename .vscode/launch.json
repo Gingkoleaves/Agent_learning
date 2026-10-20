@@ -2,19 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "P3 base：DeepSeek + 本地 embedding（单步）",
-      "type": "debugpy",
-      "request": "launch",
-      "python": "D:/Miniconda3/envs/agent-learn/python.exe",
-      "module": "p3_memory_and_context.practice.base_demo",
-      "args": ["--provider", "deepseek", "--embedding", "local", "--input", "${workspaceFolder}/p3_memory_and_context/practice/data/${input:p3Input}"],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "stopOnEntry": false,
-      "justMyCode": true,
-      "env": {"PYTHONUTF8": "1", "PYTHONUNBUFFERED": "1", "P3_DEBUG": "1"}
-    },
-    {
       "name": "practice（选择章节）",
       "type": "debugpy",
       "request": "launch",
@@ -22,9 +9,12 @@
       "debugAdapterPython": "D:/Miniconda3/envs/agent-learn/python.exe",
       "debugLauncherPython": "D:/Miniconda3/envs/agent-learn/python.exe",
       "program": "${workspaceFolder}/practice.py",
-      "args": ["${input:chapter}", "run"],
+      "args": [
+        "${input:chapter}",
+        "run"
+      ],
       "cwd": "${workspaceFolder}",
-      "console": "internalConsole",
+      "console": "integratedTerminal",
       "stopOnEntry": false,
       "justMyCode": true,
       "subProcess": true,
@@ -38,24 +28,49 @@
   ],
   "inputs": [
     {
-      "id": "p3Input",
-      "type": "pickString",
-      "description": "P3 场景：初始档案 → 更新为20分钟 → 重启读取",
-      "options": ["base_input.json", "base_update.json", "base_recall.json"],
-      "default": "base_input.json"
-    },
-    {
       "id": "chapter",
       "type": "pickString",
       "description": "选择要调试的章节",
-      "options": ["1", "2", "3", "4", "5", "6"],
+      "options": [
+        {
+          "label": "P1 基础概念",
+          "value": "1"
+        },
+        {
+          "label": "P2 工具调用",
+          "value": "2"
+        },
+        {
+          "label": "P3 RAG：检索与上下文",
+          "value": "3-rag"
+        },
+        {
+          "label": "P3 MemGPT：分层记忆循环",
+          "value": "3-memgpt"
+        },
+        {
+          "label": "P4 多智能体",
+          "value": "4"
+        },
+        {
+          "label": "P5 框架",
+          "value": "5"
+        },
+        {
+          "label": "P6 评测",
+          "value": "6"
+        }
+      ],
       "default": "1"
     },
     {
       "id": "modelProvider",
       "type": "pickString",
       "description": "选择模型",
-      "options": ["scripted", "deepseek"],
+      "options": [
+        "scripted",
+        "deepseek"
+      ],
       "default": "scripted"
     }
   ]

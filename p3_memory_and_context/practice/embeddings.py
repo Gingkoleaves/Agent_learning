@@ -1,11 +1,9 @@
 """Embedding backends. Hashing is an offline protocol baseline, not semantic embedding."""
 import hashlib
-import json
 import math
 import os
 import re
 from pathlib import Path
-from urllib.request import Request, urlopen
 
 
 def terms(text):
@@ -18,8 +16,6 @@ def terms(text):
 
 def normalize(vector):
     values = [float(v) for v in vector]
-    if not values or not all(math.isfinite(v) for v in values):
-        raise ValueError("invalid_embedding")
     norm = math.sqrt(sum(v * v for v in values))
     return [v / norm for v in values] if norm else values
 
@@ -36,30 +32,8 @@ class HashEmbedding:
             result.append(normalize(vector))
         return result
 
-
-class APIEmbedding:
-    def __init__(self, timeout=30):
-        self.url = os.environ.get("EMBEDDING_URL", "")
-        self.model = os.environ.get("EMBEDDING_MODEL", "")
-        self.key = os.environ.get("EMBEDDING_API_KEY", "")
-        if not all((self.url, self.model, self.key)):
-            raise ValueError("Set EMBEDDING_URL (full endpoint), EMBEDDING_MODEL, EMBEDDING_API_KEY")
-        self.name = "api:" + self.model + ":" + self.url
-        self.timeout = timeout
-
-    def encode(self, texts):
-        result = []
-        for start in range(0, len(texts), 16):
-            batch = texts[start:start + 16]
-            req = Request(self.url, data=json.dumps({"model": self.model, "input": batch}).encode(),
-                          headers={"Authorization": "Bearer " + self.key, "Content-Type": "application/json"})
-            with urlopen(req, timeout=self.timeout) as response:
-                data = json.load(response)
-            rows = sorted(data["data"], key=lambda r: r["index"])
-            if [r["index"] for r in rows] != list(range(len(batch))):
-                raise ValueError("embedding_response_count_mismatch")
-            result.extend(normalize(r["embedding"]) for r in rows)
-        return result
+    def encode_query(self, text):
+        return self.encode([text])[0]
 
 
 class LocalEmbedding:
@@ -82,8 +56,6 @@ def get_embedder():
     provider = os.environ.get("P3_EMBEDDING_PROVIDER", "hash")
     if provider == "hash":
         return HashEmbedding()
-    if provider == "api":
-        return APIEmbedding()
     if provider == "local":
         return LocalEmbedding()
     raise ValueError("unknown_embedding_provider")

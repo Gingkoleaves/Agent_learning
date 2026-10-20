@@ -1,0 +1,41 @@
+{
+  "mechanism_tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "comparison": [
+    {
+      "strategy": "truncate",
+      "target_available": false,
+      "input_estimate": 10992,
+      "model_calls": 0,
+      "tool_calls": 0,
+      "note": "context availability only; no answer generated"
+    },
+    {
+      "strategy": "summary",
+      "target_available": false,
+      "input_estimate": 11252,
+      "model_calls": 0,
+      "tool_calls": 0,
+      "note": "context availability only; no answer generated"
+    },
+    {
+      "strategy": "summary_retrieval",
+      "target_available": true,
+      "input_estimate": 11115,
+      "model_calls": 0,
+      "tool_calls": 0,
+      "note": "context availability only; no answer generated"
+    },
+    {
+      "strategy": "memgpt_scripted",
+      "target_available": true,
+      "input_estimate": 11378,
+      "model_calls": 4,
+      "tool_calls": 4,
+      "note": "scripted tool policy; includes tool schema overhead, not QA accuracy"
+    }
+  ],
+  "artifacts": "D:\\Tongji\\Agent_Learn\\p3_memory_and_context\\practice\\artifacts\\memory_runs\\7e4e410129\\comparison-ded228ba",
+  "limitations": "Synthetic case; same 11400-byte input cap, MemGPT also pays tool-schema overhead; target availability is not answer accuracy. No claim of MemGPT superiority."
+}
