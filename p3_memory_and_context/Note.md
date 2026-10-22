@@ -1,5 +1,7 @@
 # 2026年10月10日
 
+记忆与上下文
+
 ## LangChain memory [https://docs.langchain.com/oss/python/langchain/overview]
 
 > Agent = Model + Harness，The harness is everything around the model loop: the prompt, the tools, and any middleware that shapes behavior.

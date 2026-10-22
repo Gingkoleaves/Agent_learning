@@ -1,1 +1,8 @@
-{"id": "p4-sample-001", "fixture_only": true, "input": {"mode": "multi_reflection", "task_id": "discussion-001", "topic": "ReAct / Toolformer / MemGPT", "fault": null}, "expected_facts": [], "expected_evidence_ids": [], "initial_state": {}, "expected_final_state": null, "allowed_actions": [], "forbidden_actions": [], "user_script": [], "annotation_status": "TODO: 人工补全后才能用于正式评测"}
+{"id":"normal","description":"三个主题，共同时间19:00–20:00","expected_status":"completed"}
+{"id":"later_start","description":"资料员只能19:30后参加，计划必须随输入改变","availability":{"researcher":{"start":"19:30"}},"expected_status":"completed"}
+{"id":"short_meeting","description":"主持人19:30离开，议程总长不得超过30分钟","availability":{"host":{"end":"19:30"}},"expected_status":"completed"}
+{"id":"different_day","description":"三人的日期一起改变，不能写死样例日期","availability":{"host":{"date":"2026-10-23"},"researcher":{"date":"2026-10-23"},"critic":{"date":"2026-10-23"}},"expected_status":"completed"}
+{"id":"time_conflict","description":"草案后资料员推迟15分钟到场，必须纠正原草案","fault":"time_conflict","expected_status":"completed"}
+{"id":"forged_reference","description":"把草案的一条引用替换为不存在ID，必须发现并修正","fault":"forged_reference","expected_status":"completed"}
+{"id":"absent","description":"质疑者不回应，只输出两人可执行的降级安排","fault":"absent","expected_status":"degraded"}
+{"id":"no_overlap","description":"资料员20:00才有空，与主持人无正时长交集，必须拒绝","availability":{"researcher":{"start":"20:00","end":"21:00"}},"expected_status":"infeasible"}

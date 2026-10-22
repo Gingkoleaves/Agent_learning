@@ -1,7 +1,6 @@
 {
+  "provider": "offline",
   "max_model_calls": 18,
   "max_rounds": 6,
-  "timeout_seconds": 30,
-  "context_token_budget": 2000,
-  "reserve_output_tokens": 500
+  "timeout_seconds": 30
 }

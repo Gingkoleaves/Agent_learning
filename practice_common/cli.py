@@ -21,8 +21,8 @@ def main(argv=None):
     parser.add_argument("command", choices=["status", "demo", "run"])
     parser.add_argument("--input", type=Path, help="Override sample input JSON")
     parser.add_argument("--mode", choices=["rag", "memgpt"], help="P3 execution mode (default: rag)")
-    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="P3 model provider")
-    parser.add_argument("--evaluate", action="store_true", help="P3 memgpt: run mechanism evaluation")
+    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="P3/P4 model provider")
+    parser.add_argument("--evaluate", action="store_true", help="P3/P4: run evaluation")
     args = parser.parse_args(argv)
     chapter_selection = args.chapter.split("-", 1)
     args.chapter = int(chapter_selection[0])
@@ -35,6 +35,9 @@ def main(argv=None):
         for task in tasks:
             print("{} [{}] {}".format(task["id"], task["file"], task["description"]))
         return 0
+    if args.chapter == 4 and args.command == "run":
+        from p4_multi_agent_cowork.practice.experiment import launch
+        return launch(args.provider, args.input, args.evaluate)
     if args.chapter == 3 and args.command == "run":
         from p3_memory_and_context.practice.solution import launch
         if args.evaluate:

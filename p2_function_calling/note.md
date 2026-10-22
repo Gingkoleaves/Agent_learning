@@ -1,5 +1,7 @@
 # 2026年10月9日
 
+函数调用
+
 ## What's MCP
 
 Model-Context-Protocal：为ai连接外部系统的开源标准
