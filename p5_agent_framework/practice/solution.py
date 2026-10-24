@@ -165,7 +165,7 @@ class Nodes:
 
 
 def build_graph(**context):
-    nodes = Nodes(context)
+    nodes = context.get('nodes_class', Nodes)(context)
     graph = StateGraph(StudyState)
     for name in ('load_profile', 'retrieve', 'generate', 'validate', 'confirm', 'save', 'finish'):
         graph.add_node(name, getattr(nodes, name))
@@ -193,6 +193,8 @@ async def _graph_run(payload, context):
         graph = build_graph(**dict(context, checkpointer=saver, stop_after=payload.get('stop_after')))
         state = initial_state(payload)
         cfg = {'configurable': {'thread_id': state['session_id']}, 'recursion_limit': 32}
+        if context.get('callbacks'):
+            cfg['callbacks'] = context['callbacks']
         snapshot = await graph.aget_state(cfg)
         if payload.get('resume'):
             if not snapshot.values:
