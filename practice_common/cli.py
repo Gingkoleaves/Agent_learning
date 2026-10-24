@@ -21,7 +21,7 @@ def main(argv=None):
     parser.add_argument("command", choices=["status", "demo", "run"])
     parser.add_argument("--input", type=Path, help="Override sample input JSON")
     parser.add_argument("--mode", choices=["rag", "memgpt"], help="P3 execution mode (default: rag)")
-    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="Model provider (P3/P4/P5)")
+    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="Model provider (P3/P4/P5/P6)")
     parser.add_argument("--evaluate", action="store_true", help="P3/P4: run evaluation")
     args = parser.parse_args(argv)
     chapter_selection = args.chapter.split("-", 1)
@@ -57,7 +57,7 @@ def main(argv=None):
     if p5_mode:
         payload["mode"] = p5_mode
     corpus = load_jsonl(ROOT / "data" / "corpus.jsonl")
-    provider = (args.provider or os.environ.get("MODEL_PROVIDER", "scripted")).strip().lower()
+    provider = (args.provider or os.environ.get("MODEL_PROVIDER", "offline" if args.chapter == 6 else "scripted")).strip().lower()
     if provider == "deepseek":
         api_key = load_deepseek_key(ROOT)
         if not api_key:
@@ -68,10 +68,13 @@ def main(argv=None):
             model_name=os.environ.get("MODEL_NAME", "deepseek-chat"),
             max_calls=config["max_model_calls"],
             timeout_seconds=config["timeout_seconds"],
-            max_output_tokens=config.get("reserve_output_tokens") if args.chapter == 5 else None,
+            max_output_tokens=config.get("reserve_output_tokens") if args.chapter in (5, 6) else None,
         )
     elif args.chapter == 5 and args.command == "run":
         from p5_agent_framework.practice.offline import OfflineModel
+        model = OfflineModel()
+    elif args.chapter == 6 and args.command == "run" and provider == "offline":
+        from p6_evaluation.practice.offline import OfflineModel
         model = OfflineModel()
     else:
         model = ScriptedModel(load_json(chapter / "data" / "responses.json"), config["max_model_calls"])

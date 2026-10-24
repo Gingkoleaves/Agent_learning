@@ -1,5 +1,9 @@
 {
   "repeats": 3,
   "suite": "development",
-  "agent_chapter": 5
+  "agent_chapter": 5,
+  "variants": [
+    "baseline",
+    "fixed"
+  ]
 }

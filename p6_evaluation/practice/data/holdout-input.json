@@ -1,0 +1,8 @@
+{
+  "repeats": 1,
+  "suite": "holdout",
+  "agent_chapter": 5,
+  "variants": [
+    "fixed"
+  ]
+}

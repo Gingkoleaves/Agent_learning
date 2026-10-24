@@ -1,0 +1,68 @@
+[
+  {
+    "case_id": "holdout-01",
+    "trial": 1,
+    "variant": "fixed",
+    "trace_path": "holdout/fixed/holdout-01/trial-1/trace.jsonl",
+    "answer": "CoH：对llm模型sft，收集若干同一任务多个执行结果(x任务描述,y是llm输出,r输出评分,z输出的文字评价)数据，将数据按r升序排列，组织为(x,zj,yj,...,zn,yn)将x-zn输入prompt，要求最大化输出yn的似然函数【逐token的概率】；希望这样sft后模型能够学会从差答案改进为好答案\nAlgorithm-Distillation：将上述方法应用到ReAct动作序列的生成，以(o,a,r)为历史预测a并最大化似然函数；具体来说，使用经典强化学习算法学习特定任务的policy并保留(o,a)历史记录，再用这些history用于训练llm得到任务无关的能力",
+    "rubric": "逐条核对标注事实，检查摘录与来源一致；不得把引用存在当成语义正确。回答须回应问题，不得夹带与原文矛盾的结论。",
+    "reviewer": null,
+    "semantic_correct": null,
+    "notes": ""
+  },
+  {
+    "case_id": "holdout-02",
+    "trial": 1,
+    "variant": "fixed",
+    "trace_path": "holdout/fixed/holdout-02/trial-1/trace.jsonl",
+    "answer": "Memory：如何获取、存储、搜索使用记忆；这里理解为embedding、context和外部vector三种记忆，分别对应从短到长的使用时间\n这里主要介绍使用MIPS作查找目标，ANN作为算法的不同实现\n\n对一段原始文本，给少量示范要求生成带api的文本，然后teacher-force查看原文每个位置生成\"[\"即api开始的概率，选top-k位置，每个位置生成若干api调用候选，调用工具后生成若干待选句子；对待选句子临时构造三种排列【没有调用，有调用无回答并把api请求[]放在句子前，有调用有回答[]放在句子前】，计算后续token的概率，选择待返回值-max(无请求,无答案)足够大的含回答句子，放回原位置来训练",
+    "rubric": "逐条核对标注事实，检查摘录与来源一致；不得把引用存在当成语义正确。需说明两种机制各自作用和差异，单纯并列原文只算机械检查通过。",
+    "reviewer": null,
+    "semantic_correct": null,
+    "notes": ""
+  },
+  {
+    "case_id": "holdout-03",
+    "trial": 1,
+    "variant": "fixed",
+    "trace_path": "holdout/fixed/holdout-03/trial-1/trace.jsonl",
+    "answer": "{\"title\": \"从50改成18分钟，重开会话学习检索。\", \"days\": [{\"date\": \"2026-11-02\", \"minutes\": 18, \"activity\": \"学习 MIPS：阅读 p1-note 第 9 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"9\"}]}, {\"date\": \"2026-11-03\", \"minutes\": 18, \"activity\": \"学习 MIPS：阅读 p1-note 第 9 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"9\"}]}, {\"date\": \"2026-11-04\", \"minutes\": 18, \"activity\": \"学习 MIPS：阅读 p1-note 第 9 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"9\"}]}]}",
+    "rubric": "核对三天日期、每日日程与引用支持；确认后才写入；从真实数据库检查任务数量、更新字段及最新档案。",
+    "reviewer": null,
+    "semantic_correct": null,
+    "notes": ""
+  },
+  {
+    "case_id": "holdout-04",
+    "trial": 1,
+    "variant": "fixed",
+    "trace_path": "holdout/fixed/holdout-04/trial-1/trace.jsonl",
+    "answer": "{\"title\": \"检索失败和写入响应丢失在同一任务出现。\", \"days\": [{\"date\": \"2026-11-02\", \"minutes\": 45, \"activity\": \"学习 MIPS：阅读 p1-note 第 9 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"9\"}]}, {\"date\": \"2026-11-03\", \"minutes\": 45, \"activity\": \"学习 MIPS：阅读 p1-note 第 9 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"9\"}]}, {\"date\": \"2026-11-04\", \"minutes\": 45, \"activity\": \"学习 MIPS：阅读 p1-note 第 9 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"9\"}]}]}",
+    "rubric": "核对三天日期、每日日程与引用支持；确认后才写入；从真实数据库检查任务数量、更新字段及最新档案。",
+    "reviewer": null,
+    "semantic_correct": null,
+    "notes": ""
+  },
+  {
+    "case_id": "holdout-05",
+    "trial": 1,
+    "variant": "fixed",
+    "trace_path": "holdout/fixed/holdout-05/trial-1/trace.jsonl",
+    "answer": "{\"title\": \"用22分钟修改旧计划并重复恢复。\", \"days\": [{\"date\": \"2026-11-02\", \"minutes\": 22, \"activity\": \"学习 sandbox：阅读 p1-note 第 14 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"14\"}]}, {\"date\": \"2026-11-03\", \"minutes\": 22, \"activity\": \"学习 sandbox：阅读 p1-note 第 14 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"14\"}]}, {\"date\": \"2026-11-04\", \"minutes\": 22, \"activity\": \"学习 sandbox：阅读 p1-note 第 14 段，写三条要点并练习。\", \"citations\": [{\"doc_id\": \"p1-note\", \"paragraph_id\": \"14\"}]}]}",
+    "rubric": "核对三天日期、每日日程与引用支持；确认后才写入；从真实数据库检查任务数量、更新字段及最新档案。",
+    "reviewer": null,
+    "semantic_correct": null,
+    "notes": ""
+  },
+  {
+    "case_id": "holdout-06",
+    "trial": 1,
+    "variant": "fixed",
+    "trace_path": "holdout/fixed/holdout-06/trial-1/trace.jsonl",
+    "answer": "资料中没有依据，无法回答。",
+    "rubric": "明确缺证，引用为空，数据库不变。",
+    "reviewer": null,
+    "semantic_correct": null,
+    "notes": ""
+  }
+]

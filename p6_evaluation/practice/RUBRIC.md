@@ -1,12 +1,28 @@
-# 人工评分与自动判分契约
+# 判分契约与人工语义审查
 
-这里只定义判分原则，不提供标准答案；标准答案需你逐题写入 cases.jsonl。
+`annotation_status="complete"` 且 `fixture_only=false` 的题才能运行；还必须具备初始数据库、非空终态标注、预期事实/证据、动作规则、脚本用户和具体 rubric。标注来自仓库段落与事先指定的业务规则。`complete` 表示标签字段完成，不表示已经有人评审模型输出。
 
-- 事实正确：逐条检查 expected_facts，错误或遗漏计失败。
-- 引用有效：来源存在，且引用内容实际支持结论。仅验证 ID 存在不够。
-- 动作约束：没有 forbidden_actions；必须动作可另加 required_actions。
-- 状态正确：最终数据库满足 expected_final_state 指定的字段；运行前先重置。
-- 规则遵守：未经确认不写入、重复请求不重复写入、缺证不伪造、使用更新偏好。
-- 未标注测例不能计入分母；实现评测器时必须拒绝 annotation_status 未完成或 fixture_only=true 的题。
+## 自动检查
 
-单次成功需满足该题全部适用条件。将每次结果保存为 case_id、trial、success、checks、duration_seconds、model_calls、tool_calls、trace_path，再按 case_id 分组计算三次全部成功比例。holdout 单独报告。
+1. **结构和状态**：答案必须是字符串，引用/claims 为对象列表；最终状态在该题的允许状态中。
+2. **事实**：每条 expected_fact 的关键词必须同时出现在指定来源的 quote 和 claim.text 中。此检查只覆盖明确列出的事实，不能代替语义审查。
+3. **引用**：doc_id/paragraph_id 在真实语料中存在，且本次工具观察确实返回过；quote 必须逐字包含于该段原文。存在 ID 但不支持结论会失败。
+4. **语义支持的保守边界**：抽取式输出要求 claim.text 等于 quote，answer 等于全部摘录的连接。自由改写/推断标为 human_review_required，citation_support 不自动通过。比较题即使摘录无误，是否表达了差异仍需人阅读 rubric。
+5. **缺证**：必须明确说明没有依据，引用和 claims 都为空。空字符串或编造答案不算正确拒答。
+6. **动作与规则**：记录实际工具尝试；允许/禁止/必需动作逐条检查。写入前必须有确认事件，重复写入不得增加任务/操作数，最新偏好从真实档案读回并检查日程。
+7. **终态**：读取磁盘数据库后比较 expected_final_state。字典匹配标注字段，列表长度及顺序严格匹配，值的类型也必须一致；非确定性的操作 UUID 和更新时间不作为期望常量。
+8. **保存真实性**：claimed_saved 时，保存 ID 和计划内容都必须对应磁盘任务。更新已有 ID 但内容未改变，同样失败。
+
+success 是以上适用机械条件的合取。它不等于人工确认的整体语义正确率。失效、超时或运行异常保留为失败行，不能从分母删除。诊断信息记录失败 checks、预期/实际终态及规则名。
+
+## 汇总
+
+开发集每题 trials={1,2,3}；只有三次齐全的题能计算“三次全成功”。重复 trial 抛错，缺失 trial 计入 incomplete_three_trial_cases，不能当作全成功。holdout 每题一次，三次指标为 null。该指标不是 τ-bench pass^k 的完整复现，也不是 pass@k。
+
+调用数包含失败尝试。p50/p95 采用排序后位置 `(n-1)*q` 的线性插值；整题耗时涵盖模型/工具/确认恢复，评测器的判分和导出不计入 agent 耗时。引用有效率只在有引用的运行中计算，缺证题不会抬高该分数。离线模型无 provider usage，明确显示 unavailable。
+
+## 人工复核
+
+`human_review.json` 保存每行的答案、rubric 和 trace_path。评审者检查遗漏、矛盾、比较维度和计划内容，把 semantic_correct 填为 true/false，并署名、注明理由。`review.py` 拒绝缺失/重复行、改过答案的复核和未署名判断。待复核行不自动通过，也不从正式语义统计的分母中消失；全部完成后才生成 reviewed_summary。
+
+本仓库提交的离线结果没有声称完成了独立人工语义审查。真实模型调用与 LangSmith 上传是否实测，必须以 report 和 manifest 为准。

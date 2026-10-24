@@ -1,0 +1,126 @@
+{
+  "baseline": {
+    "runs": 90,
+    "cases": 30,
+    "successes": 75,
+    "single_success_rate": 0.8333333333333334,
+    "all_three_success_rate": 0.8333333333333334,
+    "complete_three_trial_cases": 30,
+    "incomplete_three_trial_cases": 0,
+    "mean_model_calls": 1.5666666666666667,
+    "mean_tool_calls": 2.3666666666666667,
+    "p50_seconds": 0.07351812440901995,
+    "p95_seconds": 0.1544862309936434,
+    "usage": {},
+    "usage_kind": "unavailable",
+    "citation_runs": 78,
+    "citation_valid_rate": 1.0,
+    "human_review_required": 0,
+    "rules": {
+      "no_fabrication": {
+        "covered_runs": 90,
+        "violations": 0
+      },
+      "confirmation": {
+        "covered_runs": 51,
+        "violations": 0
+      },
+      "truthful_save": {
+        "covered_runs": 33,
+        "violations": 6
+      },
+      "latest_preference": {
+        "covered_runs": 15,
+        "violations": 0
+      },
+      "idempotency": {
+        "covered_runs": 6,
+        "violations": 0
+      }
+    },
+    "by_category": {
+      "comparison": {
+        "runs": 18,
+        "successes": 18
+      },
+      "fault": {
+        "runs": 18,
+        "successes": 3
+      },
+      "knowledge": {
+        "runs": 18,
+        "successes": 18
+      },
+      "memory": {
+        "runs": 18,
+        "successes": 18
+      },
+      "plan": {
+        "runs": 18,
+        "successes": 18
+      }
+    }
+  },
+  "fixed": {
+    "runs": 90,
+    "cases": 30,
+    "successes": 90,
+    "single_success_rate": 1.0,
+    "all_three_success_rate": 1.0,
+    "complete_three_trial_cases": 30,
+    "incomplete_three_trial_cases": 0,
+    "mean_model_calls": 1.6333333333333333,
+    "mean_tool_calls": 3.1333333333333333,
+    "p50_seconds": 0.12591707753017545,
+    "p95_seconds": 0.15436154338531197,
+    "usage": {},
+    "usage_kind": "unavailable",
+    "citation_runs": 87,
+    "citation_valid_rate": 1.0,
+    "human_review_required": 0,
+    "rules": {
+      "no_fabrication": {
+        "covered_runs": 90,
+        "violations": 0
+      },
+      "confirmation": {
+        "covered_runs": 51,
+        "violations": 0
+      },
+      "truthful_save": {
+        "covered_runs": 42,
+        "violations": 0
+      },
+      "latest_preference": {
+        "covered_runs": 15,
+        "violations": 0
+      },
+      "idempotency": {
+        "covered_runs": 6,
+        "violations": 0
+      }
+    },
+    "by_category": {
+      "comparison": {
+        "runs": 18,
+        "successes": 18
+      },
+      "fault": {
+        "runs": 18,
+        "successes": 18
+      },
+      "knowledge": {
+        "runs": 18,
+        "successes": 18
+      },
+      "memory": {
+        "runs": 18,
+        "successes": 18
+      },
+      "plan": {
+        "runs": 18,
+        "successes": 18
+      }
+    }
+  }
+}

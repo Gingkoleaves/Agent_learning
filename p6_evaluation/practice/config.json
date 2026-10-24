@@ -1,7 +1,8 @@
 {
   "max_model_calls": 8,
   "max_rounds": 8,
+  "max_tool_calls": 24,
   "timeout_seconds": 30,
-  "context_token_budget": 2000,
-  "reserve_output_tokens": 500
+  "context_token_budget": 24000,
+  "reserve_output_tokens": 2000
 }

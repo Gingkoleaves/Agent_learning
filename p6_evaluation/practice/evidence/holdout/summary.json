@@ -1,0 +1,64 @@
+{
+  "fixed": {
+    "runs": 6,
+    "cases": 6,
+    "successes": 6,
+    "single_success_rate": 1.0,
+    "all_three_success_rate": null,
+    "complete_three_trial_cases": 0,
+    "incomplete_three_trial_cases": 6,
+    "mean_model_calls": 1.6666666666666667,
+    "mean_tool_calls": 3.1666666666666665,
+    "p50_seconds": 0.07913576299324632,
+    "p95_seconds": 0.16401946637779474,
+    "usage": {},
+    "usage_kind": "unavailable",
+    "citation_runs": 5,
+    "citation_valid_rate": 1.0,
+    "human_review_required": 0,
+    "rules": {
+      "no_fabrication": {
+        "covered_runs": 6,
+        "violations": 0
+      },
+      "confirmation": {
+        "covered_runs": 3,
+        "violations": 0
+      },
+      "truthful_save": {
+        "covered_runs": 3,
+        "violations": 0
+      },
+      "latest_preference": {
+        "covered_runs": 1,
+        "violations": 0
+      },
+      "idempotency": {
+        "covered_runs": 2,
+        "violations": 0
+      }
+    },
+    "by_category": {
+      "comparison": {
+        "runs": 1,
+        "successes": 1
+      },
+      "fault": {
+        "runs": 1,
+        "successes": 1
+      },
+      "knowledge": {
+        "runs": 2,
+        "successes": 2
+      },
+      "memory": {
+        "runs": 1,
+        "successes": 1
+      },
+      "plan": {
+        "runs": 1,
+        "successes": 1
+      }
+    }
+  }
+}

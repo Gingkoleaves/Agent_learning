@@ -1,0 +1,30 @@
+{
+  "suite": "holdout",
+  "repeats": 1,
+  "config": {
+    "max_model_calls": 8,
+    "max_rounds": 8,
+    "max_tool_calls": 24,
+    "timeout_seconds": 30,
+    "context_token_budget": 24000,
+    "reserve_output_tokens": 2000
+  },
+  "variants": [
+    "fixed"
+  ],
+  "dataset_sha256": "422aeb9334668c2bb2992eb3fc2c744e2a43a38b6b45cafb9a130090a14f858d",
+  "corpus_sha256": "0f949a64d331426a0e8ab25829598a61def5ab4840aaa05a30d87a5fb86762e9",
+  "semantic_scope": "Mechanical/extractive checks; free-form answer correctness requires human review.",
+  "langsmith": {
+    "status": "disabled"
+  },
+  "python_version": "3.11.16",
+  "dependencies": {
+    "langgraph": "1.2.16",
+    "langgraph-checkpoint-sqlite": "3.1.2",
+    "opentelemetry-sdk": "1.45.1",
+    "langsmith": "0.14.12",
+    "httpx": "0.28.1"
+  },
+  "implementation_sha256": "a36ca74e61eb3510c4514cb35dabccf43dba1a7f3b5c333e84e0f4e8fc8cf6dc"
+}

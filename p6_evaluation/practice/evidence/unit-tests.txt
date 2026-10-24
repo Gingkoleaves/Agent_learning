@@ -1,0 +1,29 @@
+test_annotation_labels_never_cross_agent_boundary (p6_evaluation.practice.test_evaluation.EvaluationTests.test_annotation_labels_never_cross_agent_boundary) ... ok
+test_annotations_and_balanced_development (p6_evaluation.practice.test_evaluation.EvaluationTests.test_annotations_and_balanced_development) ... ok
+test_confirmation_not_inferred (p6_evaluation.practice.test_evaluation.EvaluationTests.test_confirmation_not_inferred) ... ok
+test_correct_source_with_negated_answer_does_not_auto_pass (p6_evaluation.practice.test_evaluation.EvaluationTests.test_correct_source_with_negated_answer_does_not_auto_pass) ... ok
+test_deadline_cancels_model_before_write (p6_evaluation.practice.test_evaluation.EvaluationTests.test_deadline_cancels_model_before_write) ... ok
+test_environment_isolation_and_no_stale_checkpoints (p6_evaluation.practice.test_evaluation.EvaluationTests.test_environment_isolation_and_no_stale_checkpoints) ... ok
+test_existing_but_unsupported_citation_fails (p6_evaluation.practice.test_evaluation.EvaluationTests.test_existing_but_unsupported_citation_fails) ... ok
+test_fake_success_is_detected_by_database (p6_evaluation.practice.test_evaluation.EvaluationTests.test_fake_success_is_detected_by_database) ... ok
+test_fake_update_success_checks_content_not_only_id (p6_evaluation.practice.test_evaluation.EvaluationTests.test_fake_update_success_checks_content_not_only_id) ... ok
+test_langsmith_explicitly_reports_missing_configuration (p6_evaluation.practice.test_evaluation.EvaluationTests.test_langsmith_explicitly_reports_missing_configuration) ... ok
+test_langsmith_sample_has_one_root_and_verifies_upload (p6_evaluation.practice.test_evaluation.EvaluationTests.test_langsmith_sample_has_one_root_and_verifies_upload) ... ok
+test_latest_profile_and_user_isolation (p6_evaluation.practice.test_evaluation.EvaluationTests.test_latest_profile_and_user_isolation) ... ok
+test_lost_ack_retry_uses_same_operation (p6_evaluation.practice.test_evaluation.EvaluationTests.test_lost_ack_retry_uses_same_operation) ... ok
+test_malformed_output_fails_without_crashing (p6_evaluation.practice.test_evaluation.EvaluationTests.test_malformed_output_fails_without_crashing) ... ok
+test_missing_evidence_does_not_accept_empty_or_fabricated_answer (p6_evaluation.practice.test_evaluation.EvaluationTests.test_missing_evidence_does_not_accept_empty_or_fabricated_answer) ... ok
+test_model_adapter_roundtrip_and_usage_without_network (p6_evaluation.practice.test_evaluation.EvaluationTests.test_model_adapter_roundtrip_and_usage_without_network) ... ok
+test_model_and_tool_budgets (p6_evaluation.practice.test_evaluation.EvaluationTests.test_model_and_tool_budgets) ... ok
+test_percentiles_three_trials_and_empty_suite (p6_evaluation.practice.test_evaluation.EvaluationTests.test_percentiles_three_trials_and_empty_suite) ... ok
+test_readback_fix_retries_real_write (p6_evaluation.practice.test_evaluation.EvaluationTests.test_readback_fix_retries_real_write) ... ok
+test_replay_completed_checkpoint_does_not_write_again (p6_evaluation.practice.test_evaluation.EvaluationTests.test_replay_completed_checkpoint_does_not_write_again) ... ok
+test_review_pending_is_not_a_passing_semantic_score (p6_evaluation.practice.test_evaluation.EvaluationTests.test_review_pending_is_not_a_passing_semantic_score) ... ok
+test_span_parentage_and_exception_status (p6_evaluation.practice.test_evaluation.EvaluationTests.test_span_parentage_and_exception_status) ... ok
+test_transient_failure_recovery_is_bounded (p6_evaluation.practice.test_evaluation.EvaluationTests.test_transient_failure_recovery_is_bounded) ... ok
+test_unannotated_and_missing_final_state_rejected (p6_evaluation.practice.test_evaluation.EvaluationTests.test_unannotated_and_missing_final_state_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 4.726s
+
+OK

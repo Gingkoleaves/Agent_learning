@@ -1,0 +1,8 @@
+{"event": "user_event", "type": "decision", "value": true}
+{"event": "tool_start", "name": "load_profile", "call_id": "tool-1", "arguments": {}}
+{"event": "tool_end", "name": "load_profile", "call_id": "tool-1", "result": {"facts": {"minutes_per_day": {"value": 45, "source": "initial", "updated_at": "2026-10-01T00:00:00Z"}, "completed": {"value": [], "source": "initial", "updated_at": "2026-10-01T00:00:00Z"}}, "history": []}}
+{"event": "new_session", "session_id": "493c9fb4-0cb6-4d81-aaa6-e89fc38a94c9"}
+{"event": "tool_start", "name": "search_notes", "call_id": "tool-2", "arguments": {"query": "sandbox"}}
+{"event": "fault_injected", "name": "search_transient"}
+{"event": "tool_error", "name": "search_notes", "call_id": "tool-2", "error": "injected temporary retrieval failure"}
+{"event": "task_error", "error_type": "OSError", "error": "injected temporary retrieval failure"}
