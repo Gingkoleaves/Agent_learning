@@ -65,6 +65,9 @@ class ScriptedModel:
         self.calls += 1
         return response
 
+    async def arespond(self, messages, tools=None):
+        return self.respond(messages, tools)
+
 
 class JsonStore:
     """Basic persistence only; validation and idempotency are student work."""

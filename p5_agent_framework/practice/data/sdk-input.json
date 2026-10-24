@@ -1,0 +1,12 @@
+{
+  "mode": "agents_sdk",
+  "question": "根据学习档案生成 ReAct 三天学习计划，确认后保存",
+  "query": "ReAct",
+  "profile": {
+    "minutes_per_day": 45,
+    "completed": []
+  },
+  "start_date": "2026-10-24",
+  "decision": null,
+  "resume": false
+}

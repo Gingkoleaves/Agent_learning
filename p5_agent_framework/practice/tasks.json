@@ -6,18 +6,18 @@
   },
   {
     "id": "P5-02",
-    "file": "solution.py:resume_session",
-    "description": "读取持久化检查点并恢复，正确区分用户确认状态"
+    "file": "solution.py:run",
+    "description": "终端读取用户确认，再用同一会话恢复检查点并保存或拒绝"
   },
   {
     "id": "P5-03",
-    "file": "solution.py:run_sdk_baseline",
-    "description": "用 OpenAI Agents SDK 实现小型同题对照"
+    "file": "solution.py:run_agents_sdk",
+    "description": "使用 OpenAI Agents SDK 的 Agent、function_tool 和 Runner 完成检索、生成并校验三天计划"
   },
   {
     "id": "P5-04",
     "file": "solution.py:run",
-    "description": "分派新建/恢复与框架对照，外部写入复用第 2 章幂等工具"
+    "description": "运行 LangGraph 新建/恢复流程，外部写入复用第 2 章幂等工具"
   },
   {
     "id": "P5-STATE",

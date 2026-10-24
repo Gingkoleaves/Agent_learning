@@ -1,5 +1,0 @@
-[
-  {"stop_after": "retrieval", "expected": "恢复后可继续生成，保留已有证据"},
-  {"stop_after": "waiting_confirmation", "expected": "恢复后仍等待用户决定，拒绝时不写入"},
-  {"stop_after": "external_write", "expected": "恢复后最多一个任务，沿用同一 request_id"}
-]

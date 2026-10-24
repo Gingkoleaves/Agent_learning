@@ -1,7 +1,12 @@
 {
   "mode": "langgraph",
-  "session_id": "session-001",
-  "question": "生成三天学习计划，确认后保存",
+  "question": "根据学习档案生成 ReAct 三天学习计划，确认后保存",
+  "query": "ReAct",
+  "profile": {
+    "minutes_per_day": 45,
+    "completed": []
+  },
+  "start_date": "2026-10-23",
   "decision": null,
   "resume": false
 }

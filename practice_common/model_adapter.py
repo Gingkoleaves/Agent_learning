@@ -35,23 +35,13 @@ class DeepSeekAdapter(ModelAdapter):
         if self.calls >= self.max_calls:
             raise RuntimeError("model_call_budget_exhausted")
 
-        body = {
-            "model": self.model_name,
-            "messages": self._prepare_messages(messages),
-        }
-        if self.max_output_tokens is not None:
-            body["max_tokens"] = self.max_output_tokens
-        if tools:
-            body["tools"] = [tool if isinstance(tool, dict) else _tool_schema(tool) for tool in tools]
-            body["tool_choice"] = "auto"
+        body = self._request_body(messages, tools)
 
         request = Request(
             self.base_url,
             data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
-            headers={
-                "Authorization": "Bearer " + self.api_key,
-                "Content-Type": "application/json",
-            },
+            headers={"Authorization": "Bearer " + self.api_key,
+                     "Content-Type": "application/json"},
             method="POST",
         )
         try:
@@ -64,6 +54,42 @@ class DeepSeekAdapter(ModelAdapter):
             raise RuntimeError("deepseek_connection_error: {}".format(error.reason))
 
         self.calls += 1
+        return self._parse_response(payload)
+
+    async def arespond(self, messages, tools=None):
+        """Cancellable transport for framework callers; no background worker thread."""
+        import httpx
+
+        if self.calls >= self.max_calls:
+            raise RuntimeError("model_call_budget_exhausted")
+        self.calls += 1  # An attempted request consumes budget even on cancellation.
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
+                response = await client.post(self.base_url, json=self._request_body(messages, tools),
+                    headers={"Authorization": "Bearer " + self.api_key})
+                response.raise_for_status()
+                return self._parse_response(response.json())
+        except httpx.TimeoutException as error:
+            raise TimeoutError("deepseek_request_timeout") from error
+        except httpx.HTTPStatusError as error:
+            raise RuntimeError(f"deepseek_http_error_{error.response.status_code}") from error
+        except httpx.RequestError as error:
+            raise RuntimeError("deepseek_connection_error") from error
+
+    def _request_body(self, messages, tools):
+        body = {
+            "model": self.model_name,
+            "messages": self._prepare_messages(messages),
+        }
+        if self.max_output_tokens is not None:
+            body["max_tokens"] = self.max_output_tokens
+        if tools:
+            body["tools"] = [tool if isinstance(tool, dict) else _tool_schema(tool) for tool in tools]
+            body["tool_choice"] = "auto"
+
+        return body
+
+    def _parse_response(self, payload):
         usage = payload.get("usage") or {}
         for key, value in usage.items():
             if isinstance(value, (int, float)):

@@ -1,1 +1,4 @@
-# Add and pin only dependencies actually used by this chapter.
+langgraph==1.2.16
+langgraph-checkpoint-sqlite==3.1.2
+httpx==0.28.1
+openai-agents==0.24.0

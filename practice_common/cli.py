@@ -16,17 +16,17 @@ CHAPTERS = {
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Agent learning practice scaffold")
-    parser.add_argument("chapter", choices=[str(n) for n in CHAPTERS] + ["3-rag", "3-memgpt"],
-                        help="Chapter number; 3-rag/3-memgpt also select the P3 mode")
+    parser.add_argument("chapter", choices=[str(n) for n in CHAPTERS] + ["3-rag", "3-memgpt", "5-langgraph", "5-agents_sdk"],
+                        help="Chapter number or named P3/P5 practice")
     parser.add_argument("command", choices=["status", "demo", "run"])
     parser.add_argument("--input", type=Path, help="Override sample input JSON")
     parser.add_argument("--mode", choices=["rag", "memgpt"], help="P3 execution mode (default: rag)")
-    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="P3/P4 model provider")
+    parser.add_argument("--provider", choices=["scripted", "offline", "deepseek"], help="Model provider (P3/P4/P5)")
     parser.add_argument("--evaluate", action="store_true", help="P3/P4: run evaluation")
     args = parser.parse_args(argv)
     chapter_selection = args.chapter.split("-", 1)
     args.chapter = int(chapter_selection[0])
-    if len(chapter_selection) == 2 and args.mode is None:
+    if args.chapter == 3 and len(chapter_selection) == 2 and args.mode is None:
         args.mode = chapter_selection[1]
     chapter = ROOT / CHAPTERS[args.chapter] / "practice"
     tasks = load_json(chapter / "tasks.json")
@@ -38,6 +38,8 @@ def main(argv=None):
     if args.chapter == 4 and args.command == "run":
         from p4_multi_agent_cowork.practice.experiment import launch
         return launch(args.provider, args.input, args.evaluate)
+    if args.chapter == 5 and args.evaluate:
+        parser.error("P5 runs the LangGraph workflow; evaluation mode has been removed")
     if args.chapter == 3 and args.command == "run":
         from p3_memory_and_context.practice.solution import launch
         if args.evaluate:
@@ -49,9 +51,13 @@ def main(argv=None):
         return launch(args.mode or "rag", provider, args.input)
     trace = Trace(chapter / "artifacts" / (args.command + ".jsonl"))
     config = load_json(chapter / "config.json")
-    payload = load_json(args.input or chapter / "data" / "input.json")
+    p5_mode = chapter_selection[1] if args.chapter == 5 and len(chapter_selection) == 2 else None
+    default_input = "sdk-input.json" if p5_mode == "agents_sdk" else "input.json"
+    payload = load_json(args.input or chapter / "data" / default_input)
+    if p5_mode:
+        payload["mode"] = p5_mode
     corpus = load_jsonl(ROOT / "data" / "corpus.jsonl")
-    provider = os.environ.get("MODEL_PROVIDER", "scripted").strip().lower()
+    provider = (args.provider or os.environ.get("MODEL_PROVIDER", "scripted")).strip().lower()
     if provider == "deepseek":
         api_key = load_deepseek_key(ROOT)
         if not api_key:
@@ -62,7 +68,11 @@ def main(argv=None):
             model_name=os.environ.get("MODEL_NAME", "deepseek-chat"),
             max_calls=config["max_model_calls"],
             timeout_seconds=config["timeout_seconds"],
+            max_output_tokens=config.get("reserve_output_tokens") if args.chapter == 5 else None,
         )
+    elif args.chapter == 5 and args.command == "run":
+        from p5_agent_framework.practice.offline import OfflineModel
+        model = OfflineModel()
     else:
         model = ScriptedModel(load_json(chapter / "data" / "responses.json"), config["max_model_calls"])
     trace.emit("start", chapter=args.chapter, mode=args.command)

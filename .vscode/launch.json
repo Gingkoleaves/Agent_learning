@@ -19,6 +19,7 @@
       "justMyCode": true,
       "subProcess": true,
       "env": {
+        "SSL_CERT_FILE": "D:/Miniconda3/envs/agent-learn/Lib/site-packages/certifi/cacert.pem",
         "PYTHONUTF8": "1",
         "PYTHONUNBUFFERED": "1",
         "MCP_DEBUG_TIMEOUT_SECONDS": "3600",
@@ -53,8 +54,12 @@
           "value": "4"
         },
         {
-          "label": "P5 框架",
-          "value": "5"
+          "label": "P5 LangGraph：计划、确认与恢复",
+          "value": "5-langgraph"
+        },
+        {
+          "label": "P5 OpenAI Agents SDK：工具调用与计划生成",
+          "value": "5-agents_sdk"
         },
         {
           "label": "P6 评测",
